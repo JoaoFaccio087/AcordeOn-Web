@@ -23,6 +23,6 @@ As páginas são publicadas pelo **GitHub Pages**, a partir do branch `main`, na
 
 ## Contato
 
-SEU-EMAIL-AQUI
+joaofaccio210@gmail.com
 
 © 2026 João Faccio — todos os direitos reservados.
