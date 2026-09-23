@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AcordeOn — Cifras e repertório no seu bolso</title>
+<meta name="description" content="Organize suas cifras e repertórios no iPhone e no iPad. Funciona offline, sem cadastro e sem anúncios.">
+<link rel="icon" href="icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #0E0F12;
+    --superficie: #15171C;
+    --borda: rgba(231,233,238,0.09);
+    --texto: #E7E9EE;
+    --suave: #9CA3AF;
+    --destaque: #6366F1;
+    --claro: #A5B4FC;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: 'Outfit', -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  .envoltorio { max-width: 880px; margin: 0 auto; padding: 0 22px; }
+  header { text-align: center; padding: 72px 0 48px; }
+  header img { width: 112px; height: 112px; border-radius: 26px; }
+  h1 { font-size: 40px; letter-spacing: -1px; margin: 20px 0 6px; }
+  .chamada { font-size: 19px; color: var(--suave); margin: 0 auto; max-width: 520px; }
+  .selos { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+  .selo {
+    font-size: 14px; color: var(--claro); background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.25); border-radius: 999px; padding: 7px 15px;
+  }
+  h2 { font-size: 22px; letter-spacing: -0.4px; margin: 0 0 18px; }
+  section { padding: 34px 0; border-top: 1px solid var(--borda); }
+  .itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .item {
+    background: var(--superficie); border: 1px solid var(--borda);
+    border-radius: 14px; padding: 18px;
+  }
+  .item h3 { margin: 0 0 6px; font-size: 16.5px; font-weight: 600; }
+  .item p { margin: 0; font-size: 14.5px; color: var(--suave); }
+  .destaque-caixa {
+    background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.25);
+    border-radius: 14px; padding: 20px;
+  }
+  .destaque-caixa p { margin: 0 0 10px; }
+  a { color: var(--claro); }
+  .exemplo {
+    font-family: 'JetBrains Mono', monospace; font-size: 13.5px; white-space: pre;
+    overflow-x: auto; background: var(--superficie); border: 1px solid var(--borda);
+    border-radius: 14px; padding: 18px; color: var(--texto); margin: 0;
+  }
+  .exemplo b { color: var(--claro); }
+  footer {
+    border-top: 1px solid var(--borda); margin-top: 20px; padding: 28px 0 46px;
+    text-align: center; color: var(--suave); font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="envoltorio">
+
+  <header>
+    <img src="icone.png" alt="Ícone do AcordeOn">
+    <h1>AcordeOn</h1>
+    <p class="chamada">Suas cifras e repertórios organizados no celular, prontos para a hora de tocar.</p>
+    <div class="selos">
+      <span class="selo">Funciona offline</span>
+      <span class="selo">Sem anúncios</span>
+      <span class="selo">Sem cadastro</span>
+      <span class="selo">Em breve na App Store</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>O que o app faz</h2>
+    <div class="itens">
+      <div class="item">
+        <h3>Sua biblioteca de cifras</h3>
+        <p>Escreva, cole ou importe de arquivos .txt e .docx e de páginas da internet. Busque por título, autor, tom, tag ou ritmo.</p>
+      </div>
+      <div class="item">
+        <h3>Troca de tom que fica salva</h3>
+        <p>Suba ou desça o tom de cada música e o app lembra da sua escolha, inclusive nas listas.</p>
+      </div>
+      <div class="item">
+        <h3>Feito para o palco</h3>
+        <p>Rolagem automática, letra maior com um toque, troca de música arrastando ou pelas bordas e opção de ver só a letra.</p>
+      </div>
+      <div class="item">
+        <h3>Repertórios em pastas</h3>
+        <p>Monte a ordem de execução de cada culto, casamento ou show. Uma música pode estar em várias pastas.</p>
+      </div>
+      <div class="item">
+        <h3>Acordes com diagramas</h3>
+        <p>Toque em qualquer acorde da cifra e veja como fazer no violão, na guitarra ou no teclado.</p>
+      </div>
+      <div class="item">
+        <h3>Ritmos e gravações</h3>
+        <p>Monte a batida com setas e grave trechos da música para lembrar depois, tudo guardado no aparelho.</p>
+      </div>
+      <div class="item">
+        <h3>Exportar em PDF</h3>
+        <p>Gere o PDF de uma música ou do repertório inteiro, no tom atual, para imprimir ou enviar.</p>
+      </div>
+      <div class="item">
+        <h3>Backup quando quiser</h3>
+        <p>Salve um arquivo com tudo no iCloud Drive, no Google Drive ou onde preferir, e restaure num toque.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Do jeito que você já escreve</h2>
+    <p style="color: var(--suave); margin-top: 0">Os acordes ficam na linha de cima da letra, como nos sites de cifra. O app reconhece sozinho e transpõe.</p>
+<pre class="exemplo">[Refrão]
+<b>C          G</b>
+Deixa o dia vir sem pressa
+<b>D                   Em7</b>
+Que a pressa já passou por aqui</pre>
+  </section>
+
+  <section>
+    <h2>Privacidade</h2>
+    <div class="destaque-caixa">
+      <p>O AcordeOn não coleta, não envia e não vende nenhum dado seu. Tudo o que você cria fica guardado apenas no seu aparelho.</p>
+      <p style="margin:0"><a href="privacidade.html">Ler a política de privacidade</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin:0 0 6px">Contato: <a href="mailto:SEU-EMAIL-AQUI">SEU-EMAIL-AQUI</a></p>
+    <p style="margin:0">AcordeOn · desenvolvido por João Faccio</p>
+  </footer>
+
+</div>
+</body>
+</html>
