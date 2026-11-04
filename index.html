@@ -6,6 +6,18 @@
 <title>AcordeOn — Cifras e repertório no seu bolso</title>
 <meta name="description" content="Organize suas cifras e repertórios no iPhone e no iPad. Funciona offline, sem cadastro e sem anúncios.">
 <link rel="icon" href="icone.png">
+<!-- Open Graph: é o que o LinkedIn, o WhatsApp e o Instagram leem para montar
+     o cartão do link. Sem isto o link aparece como um retângulo cinza.
+     As URLs aqui têm de ser absolutas — caminho relativo não funciona. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joaofaccio087.github.io/AcordeOn-Web/">
+<meta property="og:title" content="AcordeOn — Cifras e repertório no seu bolso">
+<meta property="og:description" content="Organize suas cifras e repertórios no iPhone e no iPad. Funciona offline, sem cadastro e sem anúncios.">
+<meta property="og:image" content="https://joaofaccio087.github.io/AcordeOn-Web/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -37,6 +49,15 @@
     font-size: 14px; color: var(--claro); background: rgba(99,102,241,0.12);
     border: 1px solid rgba(99,102,241,0.25); border-radius: 999px; padding: 7px 15px;
   }
+  .baixar { margin: 30px 0 0; }
+  .botao {
+    display: inline-block; background: var(--destaque); color: #fff;
+    text-decoration: none; font-weight: 600; font-size: 17px;
+    padding: 15px 32px; border-radius: 12px;
+    box-shadow: 0 10px 26px rgba(99,102,241,0.34);
+  }
+  .botao:hover { background: #5457E0; }
+  .preco { display: block; margin-top: 13px; font-size: 14px; color: var(--suave); }
   h2 { font-size: 22px; letter-spacing: -0.4px; margin: 0 0 18px; }
   section { padding: 34px 0; border-top: 1px solid var(--borda); }
   .itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
@@ -75,8 +96,14 @@
       <span class="selo">Funciona offline</span>
       <span class="selo">Sem anúncios</span>
       <span class="selo">Sem cadastro</span>
-      <span class="selo">Em breve na App Store</span>
     </div>
+    <!-- Enquanto a Apple não aprovar, este link devolve erro. Para voltar ao
+         estado anterior, troque o bloco abaixo por:
+         <div class="selos"><span class="selo">Em breve na App Store</span></div> -->
+    <p class="baixar">
+      <a class="botao" href="https://apps.apple.com/br/app/acordeon/id6830421465">Baixar na App Store</a>
+      <span class="preco">R$ 29,90 · iPhone e iPad · compra única</span>
+    </p>
   </header>
 
   <section>
@@ -100,7 +127,7 @@
       </div>
       <div class="item">
         <h3>Acordes com diagramas</h3>
-        <p>Toque em qualquer acorde da cifra e veja como fazer no violão, na guitarra ou no teclado.</p>
+        <p>Toque em qualquer acorde da cifra e veja como fazer no violão ou no teclado.</p>
       </div>
       <div class="item">
         <h3>Ritmos e gravações</h3>

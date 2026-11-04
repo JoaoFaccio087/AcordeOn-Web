@@ -16,6 +16,7 @@ Este repositório guarda apenas as páginas do site. **O código do aplicativo �
 - `index.html` — página de apresentação do app
 - `privacidade.html` — política de privacidade (exigida pelas lojas de aplicativos)
 - `icone.png` — ícone do app usado nas páginas
+- `og.png` — imagem do cartão que aparece ao compartilhar o link (1200 × 630)
 
 ## Publicação
 
