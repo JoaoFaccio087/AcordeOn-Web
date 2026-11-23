@@ -1,6 +1,6 @@
 # AcordeOn — Web
 
-Site público do **AcordeOn**, aplicativo para organizar cifras e repertórios no celular e no tablet.
+Site público do **AcordeOn**, aplicativo para gerenciar músicas e cifras no iPhone e no iPad.
 
 Este repositório guarda apenas as páginas do site. **O código do aplicativo é privado.**
 
@@ -13,10 +13,15 @@ Este repositório guarda apenas as páginas do site. **O código do aplicativo �
 
 ## Arquivos
 
-- `index.html` — página de apresentação do app
-- `privacidade.html` — política de privacidade (exigida pelas lojas de aplicativos)
-- `icone.png` — ícone do app usado nas páginas
-- `og.png` — imagem do cartão que aparece ao compartilhar o link (1200 × 630)
+| Arquivo | Uso |
+|---|---|
+| `index.html` | Página de apresentação do app |
+| `privacidade.html` | Política de privacidade (exigida pela App Store) |
+| `icone.png` | Ícone do app usado nas páginas |
+| `favicon.ico`, `favicon-32.png` | Ícone da aba do navegador |
+| `apple-touch-icon.png` | Ícone ao salvar o site na tela de início do iPhone |
+| `og.png` | Cartão que aparece ao compartilhar o link (1200 × 630) |
+| `img/` | Prints do app e selo da App Store |
 
 ## Publicação
 

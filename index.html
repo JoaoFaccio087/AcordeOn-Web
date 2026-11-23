@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AcordeOn — Cifras e repertório no seu bolso</title>
-<meta name="description" content="Organize suas cifras e repertórios no iPhone e no iPad. Funciona offline, sem cadastro e sem anúncios.">
-<link rel="icon" href="icone.png">
-<!-- Open Graph: é o que o LinkedIn, o WhatsApp e o Instagram leem para montar
-     o cartão do link. Sem isto o link aparece como um retângulo cinza.
-     As URLs aqui têm de ser absolutas — caminho relativo não funciona. -->
+<title>AcordeOn — Gerencie músicas e cifras</title>
+<meta name="description" content="Cifras, tablaturas e acordes no iPhone e no iPad. Transposição em um toque, pastas, PDF e funciona sem internet.">
+<meta name="theme-color" content="#0B0A1F">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Open Graph: o cartão que aparece ao mandar o link no WhatsApp, LinkedIn e
+     Instagram. As URLs têm de ser absolutas. -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://joaofaccio087.github.io/AcordeOn-Web/">
-<meta property="og:title" content="AcordeOn — Cifras e repertório no seu bolso">
-<meta property="og:description" content="Organize suas cifras e repertórios no iPhone e no iPad. Funciona offline, sem cadastro e sem anúncios.">
+<meta property="og:title" content="AcordeOn — Gerencie músicas e cifras">
+<meta property="og:description" content="Cifras, tablaturas e acordes no iPhone e no iPad. Funciona sem internet, sem cadastro e sem anúncios.">
 <meta property="og:image" content="https://joaofaccio087.github.io/AcordeOn-Web/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -23,150 +25,296 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --fundo: #0E0F12;
+    --fundo: #0B0A1F;
     --superficie: #15171C;
-    --borda: rgba(231,233,238,0.09);
+    --campo: #181A20;
+    --borda: rgba(231,233,238,0.08);
     --texto: #E7E9EE;
     --suave: #9CA3AF;
+    --apagado: #6B7280;
     --destaque: #6366F1;
     --claro: #A5B4FC;
+    --medio: #818CF8;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    background: var(--fundo);
-    color: var(--texto);
-    font-family: 'Outfit', -apple-system, Segoe UI, Roboto, sans-serif;
-    line-height: 1.6;
+    margin: 0; background: var(--fundo); color: var(--texto);
+    font-family: 'Outfit', -apple-system, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
-  .envoltorio { max-width: 880px; margin: 0 auto; padding: 0 22px; }
-  header { text-align: center; padding: 72px 0 48px; }
-  header img { width: 112px; height: 112px; border-radius: 26px; }
-  h1 { font-size: 40px; letter-spacing: -1px; margin: 20px 0 6px; }
-  .chamada { font-size: 19px; color: var(--suave); margin: 0 auto; max-width: 520px; }
-  .selos { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
-  .selo {
-    font-size: 14px; color: var(--claro); background: rgba(99,102,241,0.12);
-    border: 1px solid rgba(99,102,241,0.25); border-radius: 999px; padding: 7px 15px;
-  }
-  .baixar { margin: 30px 0 0; }
-  .botao {
-    display: inline-block; background: var(--destaque); color: #fff;
-    text-decoration: none; font-weight: 600; font-size: 17px;
-    padding: 15px 32px; border-radius: 12px;
-    box-shadow: 0 10px 26px rgba(99,102,241,0.34);
-  }
-  .botao:hover { background: #5457E0; }
-  .preco { display: block; margin-top: 13px; font-size: 14px; color: var(--suave); }
-  h2 { font-size: 22px; letter-spacing: -0.4px; margin: 0 0 18px; }
-  section { padding: 34px 0; border-top: 1px solid var(--borda); }
-  .itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
-  .item {
-    background: var(--superficie); border: 1px solid var(--borda);
-    border-radius: 14px; padding: 18px;
-  }
-  .item h3 { margin: 0 0 6px; font-size: 16.5px; font-weight: 600; }
-  .item p { margin: 0; font-size: 14.5px; color: var(--suave); }
-  .destaque-caixa {
-    background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.25);
-    border-radius: 14px; padding: 20px;
-  }
-  .destaque-caixa p { margin: 0 0 10px; }
   a { color: var(--claro); }
-  .exemplo {
-    font-family: 'JetBrains Mono', monospace; font-size: 13.5px; white-space: pre;
-    overflow-x: auto; background: var(--superficie); border: 1px solid var(--borda);
-    border-radius: 14px; padding: 18px; color: var(--texto); margin: 0;
+  .envoltorio { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+
+  /* Topo: brilho roxo e pauta em onda, como na loja */
+  .topo { position: relative; overflow: hidden; padding: 28px 0 64px; }
+  .topo::before {
+    content: ''; position: absolute; left: 50%; top: 58%; width: 1500px; height: 1200px;
+    transform: translate(-30%, -50%); border-radius: 50%; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(124,108,255,.55), rgba(79,70,229,.2) 50%, rgba(11,10,31,0));
   }
-  .exemplo b { color: var(--claro); }
-  footer {
-    border-top: 1px solid var(--borda); margin-top: 20px; padding: 28px 0 46px;
-    text-align: center; color: var(--suave); font-size: 14px;
+  .pauta { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+  nav { position: relative; display: flex; align-items: center; justify-content: space-between; }
+  .marca { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 19px; color: var(--texto); text-decoration: none; }
+  .marca img { width: 34px; height: 34px; }
+  nav .links { display: flex; gap: 22px; font-size: 15px; }
+  nav .links a { color: var(--suave); text-decoration: none; }
+  nav .links a:hover { color: var(--texto); }
+
+  .heroi { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 40px; padding: 56px 0 0; }
+  .heroi img.icone { width: 92px; height: 92px; filter: drop-shadow(0 16px 40px rgba(99,102,241,.45)); }
+  h1 { font-size: clamp(44px, 7vw, 68px); line-height: 1.02; letter-spacing: -2px; margin: 22px 0 14px; }
+  .chamada { font-size: 21px; color: rgba(231,233,238,.78); margin: 0; max-width: 470px; }
+  .selos { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+  .selo { font-size: 14px; color: var(--claro); background: rgba(99,102,241,.12); border: 1px solid rgba(99,102,241,.28); border-radius: 999px; padding: 6px 14px; }
+  .baixar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 30px; }
+  .baixar img { height: 54px; display: block; }
+  .baixar small { color: var(--suave); font-size: 14px; }
+
+  .aparelho {
+    justify-self: center; width: min(300px, 70vw); aspect-ratio: 1179 / 2556; margin-bottom: 0;
+    border-radius: 46px; padding: 9px; background: #1D1F27;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 40px 100px rgba(5,4,20,.7);
+  }
+  .aparelho img { width: 100%; height: 100%; display: block; border-radius: 38px; object-fit: cover; object-position: top; }
+
+  /* Seções */
+  section { padding: 84px 0 0; }
+  .rotulo { font-size: 13px; font-weight: 600; letter-spacing: 2.2px; color: var(--medio); text-transform: uppercase; }
+  h2 { font-size: clamp(30px, 4.4vw, 40px); line-height: 1.1; letter-spacing: -1px; margin: 10px 0 12px; }
+  .sub { color: var(--suave); font-size: 18px; margin: 0 0 30px; max-width: 620px; }
+
+  .itens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .item { background: var(--superficie); border: 1px solid var(--borda); border-radius: 20px; padding: 22px; }
+  .item .ic { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    background: rgba(99,102,241,.14); color: var(--claro); margin-bottom: 14px; }
+  .item h3 { margin: 0 0 6px; font-size: 18px; font-weight: 600; }
+  .item p { margin: 0; font-size: 15px; color: var(--suave); }
+  .novo { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: #fff; background: var(--destaque); border-radius: 6px; padding: 2px 7px; margin-left: 6px; vertical-align: 3px; }
+
+  /* Faixa de telas: os prints da loja, contínuos */
+  .telas { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .telas img { width: calc((100% - 28px) / 3); min-width: 230px; border-radius: 26px; scroll-snap-align: center; display: block;
+    box-shadow: 0 0 0 1px var(--borda), 0 24px 60px rgba(0,0,0,.4); }
+
+  /* Demonstração da transposição */
+  .demo { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; }
+  .cifra { background: var(--superficie); border: 1px solid var(--borda); border-radius: 22px; padding: 22px 24px; }
+  .cifra pre { margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.55; color: var(--texto); white-space: pre; overflow-x: auto; }
+  .cifra pre b { color: var(--claro); transition: color .2s; }
+  .cifra pre b.troca { color: #fff; }
+  .secao { font-size: 12px; font-weight: 600; letter-spacing: 1.8px; color: var(--medio); margin-bottom: 8px; }
+  .controle { display: flex; align-items: center; gap: 6px; margin-top: 18px; width: fit-content; padding: 6px; border-radius: 16px; background: var(--campo); border: 1px solid var(--borda); }
+  .controle button { width: 46px; height: 42px; border: 0; border-radius: 12px; background: #23262F; color: var(--texto); font-size: 22px; cursor: pointer; font-family: inherit; }
+  .controle button:hover { background: #2C2F3A; }
+  .controle span { min-width: 64px; text-align: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 18px; color: var(--claro); }
+
+  .privacidade { display: flex; gap: 22px; align-items: center; background: rgba(99,102,241,.10); border: 1px solid rgba(99,102,241,.25); border-radius: 22px; padding: 26px 28px; }
+  .privacidade p { margin: 0; color: rgba(231,233,238,.85); }
+
+  .final { text-align: center; padding: 96px 0 0; }
+  .final img.icone { width: 110px; height: 110px; filter: drop-shadow(0 18px 50px rgba(99,102,241,.5)); }
+  .final h2 { margin-top: 18px; }
+  .final .baixar { justify-content: center; }
+
+  footer { border-top: 1px solid var(--borda); margin-top: 90px; padding: 28px 0 44px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--suave); font-size: 14px; }
+  footer a { color: var(--suave); }
+
+  @media (max-width: 860px) {
+    .heroi { grid-template-columns: 1fr; text-align: center; padding-top: 40px; }
+    .heroi .chamada { margin: 0 auto; }
+    .selos, .baixar { justify-content: center; }
+    .aparelho { width: min(270px, 72vw); margin-top: 10px; }
+    .itens { grid-template-columns: 1fr 1fr; }
+    .demo { grid-template-columns: 1fr; }
+    nav .links a.esconde { display: none; }
+  }
+  @media (max-width: 560px) {
+    .itens { grid-template-columns: 1fr; }
+    .privacidade { flex-direction: column; align-items: flex-start; }
+    .telas img { min-width: 72%; }
   }
 </style>
 </head>
 <body>
+
+<div class="topo">
+  <svg class="pauta" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="rgba(190,180,255,.22)" stroke-width="2">
+      <path d="M0 560 C 300 400, 520 400, 760 540 S 1200 700, 1440 540"/>
+      <path d="M0 584 C 300 424, 520 424, 760 564 S 1200 724, 1440 564"/>
+      <path d="M0 608 C 300 448, 520 448, 760 588 S 1200 748, 1440 588"/>
+      <path d="M0 632 C 300 472, 520 472, 760 612 S 1200 772, 1440 612"/>
+      <path d="M0 656 C 300 496, 520 496, 760 636 S 1200 796, 1440 636"/>
+    </g>
+  </svg>
+  <div class="envoltorio">
+    <nav>
+      <a class="marca" href="./"><img src="icone.png" alt="">AcordeOn</a>
+      <div class="links">
+        <a class="esconde" href="#recursos">Recursos</a>
+        <a class="esconde" href="#telas">Telas</a>
+        <a href="privacidade.html">Privacidade</a>
+      </div>
+    </nav>
+
+    <div class="heroi">
+      <div>
+        <img class="icone" src="icone.png" alt="Ícone do AcordeOn">
+        <h1>Gerencie músicas e cifras.</h1>
+        <p class="chamada">Cifras, tablaturas e acordes no iPhone e no iPad. Troque o tom com um toque e organize tudo em pastas.</p>
+        <div class="selos">
+          <span class="selo">Funciona offline</span>
+          <span class="selo">Sem anúncios</span>
+          <span class="selo">Sem cadastro</span>
+        </div>
+        <div class="baixar">
+          <a href="https://apps.apple.com/br/app/acordeon/id6830421465"><img src="img/app-store.png" alt="Baixar na App Store"></a>
+          <small>Compra única · iPhone e iPad</small>
+        </div>
+      </div>
+      <div class="aparelho"><img src="img/musica.jpg" alt="Tela de uma música no AcordeOn, com os acordes acima da letra"></div>
+    </div>
+  </div>
+</div>
+
 <div class="envoltorio">
 
-  <header>
-    <img src="icone.png" alt="Ícone do AcordeOn">
-    <h1>AcordeOn</h1>
-    <p class="chamada">Suas cifras e repertórios organizados no celular, prontos para a hora de tocar.</p>
-    <div class="selos">
-      <span class="selo">Funciona offline</span>
-      <span class="selo">Sem anúncios</span>
-      <span class="selo">Sem cadastro</span>
-    </div>
-    <!-- Enquanto a Apple não aprovar, este link devolve erro. Para voltar ao
-         estado anterior, troque o bloco abaixo por:
-         <div class="selos"><span class="selo">Em breve na App Store</span></div> -->
-    <p class="baixar">
-      <a class="botao" href="https://apps.apple.com/br/app/acordeon/id6830421465">Baixar na App Store</a>
-      <span class="preco">R$ 29,90 · iPhone e iPad · compra única</span>
-    </p>
-  </header>
-
-  <section>
-    <h2>O que o app faz</h2>
+  <section id="recursos">
+    <div class="rotulo">Recursos</div>
+    <h2>Tudo o que você precisa para tocar.</h2>
+    <p class="sub">Escreva ou importe a música, ajuste o tom e encontre cada cifra quando precisar.</p>
     <div class="itens">
       <div class="item">
-        <h3>Sua biblioteca de cifras</h3>
-        <p>Escreva, cole ou importe de arquivos .txt e .docx e de páginas da internet. Busque por título, autor, tom, tag ou ritmo.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h3>Biblioteca de cifras</h3>
+        <p>Escreva, cole ou importe de arquivos, de links de páginas de cifra e de backups de outros apps.</p>
       </div>
       <div class="item">
-        <h3>Troca de tom que fica salva</h3>
-        <p>Suba ou desça o tom de cada música e o app lembra da sua escolha, inclusive nas listas.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h3>Transposição em um toque</h3>
+        <p>Acordes e tablaturas mudam juntos, e o tom fica salvo em cada música. O tom original é detectado pelos acordes.</p>
       </div>
       <div class="item">
-        <h3>Feito para o palco</h3>
-        <p>Rolagem automática, letra maior com um toque, troca de música arrastando ou pelas bordas e opção de ver só a letra.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="14" x2="21" y2="14"/><line x1="3" y1="18" x2="21" y2="18"/><circle cx="8" cy="10" r="1.6" fill="currentColor"/><circle cx="15" cy="14" r="1.6" fill="currentColor"/></svg></div>
+        <h3>Editor de tablatura <span class="novo">NOVO</span></h3>
+        <p>Toque na corda e na posição e escolha a casa, sem digitar traços. Desenhada como na tablatura impressa.</p>
       </div>
       <div class="item">
-        <h3>Repertórios em pastas</h3>
-        <p>Monte a ordem de execução de cada culto, casamento ou show. Uma música pode estar em várias pastas.</p>
-      </div>
-      <div class="item">
-        <h3>Acordes com diagramas</h3>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9.7" y1="3" x2="9.7" y2="21"/><line x1="14.3" y1="3" x2="14.3" y2="21"/><line x1="5" y1="8" x2="19" y2="8"/><line x1="5" y1="13" x2="19" y2="13"/></svg></div>
+        <h3>Dicionário de acordes</h3>
         <p>Toque em qualquer acorde da cifra e veja como fazer no violão ou no teclado.</p>
       </div>
       <div class="item">
-        <h3>Ritmos e gravações</h3>
-        <p>Monte a batida com setas e grave trechos da música para lembrar depois, tudo guardado no aparelho.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Pastas e tags</h3>
+        <p>Organize as músicas em pastas, na ordem que quiser. Uma música pode estar em várias pastas.</p>
       </div>
       <div class="item">
-        <h3>Exportar em PDF</h3>
-        <p>Gere o PDF de uma música ou do repertório inteiro, no tom atual, para imprimir ou enviar.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+        <h3>Compartilhamento <span class="novo">NOVO</span></h3>
+        <p>Envie uma música ou uma pasta para quem também usa o AcordeOn, ou exporte em PDF A4.</p>
       </div>
       <div class="item">
-        <h3>Backup quando quiser</h3>
-        <p>Salve um arquivo com tudo no iCloud Drive, no Google Drive ou onde preferir, e restaure num toque.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg></div>
+        <h3>Na hora de tocar</h3>
+        <p>Rolagem automática, zoom da letra por música, duas colunas no iPad e opção de ver só a letra.</p>
+      </div>
+      <div class="item">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Ferramentas <span class="novo">NOVO</span></h3>
+        <p>Campo harmônico de qualquer tom e mapa de notas no braço do violão e no teclado.</p>
+      </div>
+      <div class="item">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <h3>Backup completo</h3>
+        <p>Um arquivo com tudo, gravações incluídas, para guardar no iCloud Drive ou onde preferir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="telas">
+    <div class="rotulo">Telas</div>
+    <h2>Feito para ler de relance.</h2>
+    <p class="sub">Fundo escuro, acordes em destaque e letra em fonte de largura fixa, para o acorde cair na sílaba certa.</p>
+    <div class="telas">
+      <img src="img/loja-01.jpg" alt="Biblioteca de músicas" loading="lazy">
+      <img src="img/loja-02.jpg" alt="Tela da música com o dicionário de acordes" loading="lazy">
+      <img src="img/loja-03.jpg" alt="Editor de tablatura" loading="lazy">
+    </div>
+  </section>
+
+  <section>
+    <div class="demo">
+      <div>
+        <div class="rotulo">Do jeito que você já escreve</div>
+        <h2>Acordes na linha de cima. O resto é com o app.</h2>
+        <p class="sub" style="margin-bottom:0">O AcordeOn reconhece os acordes sozinho, mantém o alinhamento com a letra e transpõe a cifra inteira. Experimente:</p>
+      </div>
+      <div class="cifra">
+        <div class="secao">REFRÃO</div>
+<pre id="cifra"></pre>
+        <div class="controle">
+          <button type="button" id="menos" aria-label="Descer meio tom">−</button>
+          <span id="tom">G</span>
+          <button type="button" id="mais" aria-label="Subir meio tom">+</button>
+        </div>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Do jeito que você já escreve</h2>
-    <p style="color: var(--suave); margin-top: 0">Os acordes ficam na linha de cima da letra, como nos sites de cifra. O app reconhece sozinho e transpõe.</p>
-<pre class="exemplo">[Refrão]
-<b>C          G</b>
-Deixa o dia vir sem pressa
-<b>D                   Em7</b>
-Que a pressa já passou por aqui</pre>
-  </section>
-
-  <section>
-    <h2>Privacidade</h2>
-    <div class="destaque-caixa">
-      <p>O AcordeOn não coleta, não envia e não vende nenhum dado seu. Tudo o que você cria fica guardado apenas no seu aparelho.</p>
-      <p style="margin:0"><a href="privacidade.html">Ler a política de privacidade</a></p>
+    <div class="privacidade">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#A5B4FC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p>O AcordeOn não coleta, não envia e não vende nenhum dado seu. Tudo o que você cria fica guardado no seu aparelho. <a href="privacidade.html">Ler a política de privacidade</a></p>
     </div>
   </section>
+
+  <div class="final">
+    <img class="icone" src="icone.png" alt="">
+    <h2>Suas cifras, no tom certo.</h2>
+    <p class="sub" style="margin:0 auto">Compra única, sem assinatura. Para iPhone e iPad.</p>
+    <div class="baixar">
+      <a href="https://apps.apple.com/br/app/acordeon/id6830421465"><img src="img/app-store.png" alt="Baixar na App Store"></a>
+    </div>
+  </div>
 
   <footer>
-    <p style="margin:0 0 6px">Contato: <a href="mailto:joaofaccio210@gmail.com">joaofaccio210@gmail.com</a></p>
-    <p style="margin:0">AcordeOn · desenvolvido por João Faccio</p>
+    <span>AcordeOn · desenvolvido por João Faccio</span>
+    <span><a href="privacidade.html">Privacidade</a> · <a href="mailto:joaofaccio210@gmail.com">Contato</a></span>
   </footer>
-
 </div>
+
+<script>
+  // Transposição de exemplo: as mesmas regras do app, em miniatura
+  const NOTAS = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  const LINHAS = [
+    [[0,'G'],[13,'D']], 'Deixa o dia vir sem pressa',
+    [[0,'Em'],[18,'C']], 'Que a pressa já passou por aqui',
+    [[0,'G'],[13,'D']], 'Canto baixo pra lembrar',
+    [[0,'Em'],[9,'C'],[18,'D']], 'Tudo o que ficou de bom',
+  ];
+  let passo = 0;
+  const transpor = (a, s) => { const m = a.match(/^([A-G]#?)(.*)$/); return NOTAS[(NOTAS.indexOf(m[1]) + s + 120) % 12] + m[2]; };
+  function desenhar(marcar) {
+    let html = '';
+    for (const l of LINHAS) {
+      if (typeof l === 'string') { html += l + '\n'; continue; }
+      let linha = '';
+      for (const [col, ac] of l) {
+        const nome = transpor(ac, passo);
+        const vis = linha.replace(/[\u0000\u0001]/g, '').length;
+        linha += ' '.repeat(Math.max(vis ? 1 : 0, col - vis)) + `\u0000${nome}\u0001`;
+      }
+      html += linha.replace(/\u0000/g, `<b${marcar ? ' class="troca"' : ''}>`).replace(/\u0001/g, '</b>') + '\n';
+    }
+    document.getElementById('cifra').innerHTML = html.trimEnd();
+    document.getElementById('tom').textContent = transpor('G', passo);
+    if (marcar) setTimeout(() => desenhar(false), 250);
+  }
+  document.getElementById('mais').onclick = () => { passo++; desenhar(true); };
+  document.getElementById('menos').onclick = () => { passo--; desenhar(true); };
+  desenhar(false);
+</script>
 </body>
 </html>
