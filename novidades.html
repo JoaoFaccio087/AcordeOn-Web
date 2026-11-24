@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novidades · AcordeOn</title>
+<meta name="description" content="O que mudou em cada versão do AcordeOn.">
+<meta name="theme-color" content="#0B0A1F">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joaofaccio087.github.io/AcordeOn-Web/novidades.html">
+<meta property="og:title" content="Novidades · AcordeOn">
+<meta property="og:description" content="O que mudou em cada versão do AcordeOn.">
+<meta property="og:image" content="https://joaofaccio087.github.io/AcordeOn-Web/og.png">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #0B0A1F; --superficie: #15171C; --borda: rgba(231,233,238,.08);
+    --texto: #E7E9EE; --suave: #9CA3AF; --apagado: #6B7280;
+    --destaque: #6366F1; --claro: #A5B4FC; --medio: #818CF8;
+    --verde: #34D399; --ambar: #FBBF24;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fundo); color: var(--texto); font-family: 'Outfit', -apple-system, 'Segoe UI', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--claro); }
+  .envoltorio { max-width: 820px; margin: 0 auto; padding: 0 22px; }
+
+  .topo { position: relative; overflow: hidden; border-bottom: 1px solid var(--borda); }
+  .topo::before { content: ''; position: absolute; left: 50%; top: 0; width: 1300px; height: 800px; transform: translate(-50%, -50%); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(124,108,255,.5), rgba(79,70,229,.16) 50%, rgba(11,10,31,0)); pointer-events: none; }
+  .pauta { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  nav { position: relative; max-width: 1080px; margin: 0 auto; padding: 26px 22px; display: flex; align-items: center; justify-content: space-between; }
+  .marca { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 19px; color: var(--texto); text-decoration: none; }
+  .marca img { width: 34px; height: 34px; }
+  nav .links { display: flex; gap: 22px; font-size: 15px; }
+  nav .links a { color: var(--suave); text-decoration: none; }
+  nav .links a:hover, nav .links a.ativo { color: var(--texto); }
+  .cabeca { position: relative; padding: 30px 22px 56px; max-width: 820px; margin: 0 auto; }
+  .rotulo { font-size: 13px; font-weight: 600; letter-spacing: 2.2px; color: var(--medio); text-transform: uppercase; }
+  h1 { font-size: clamp(38px, 6vw, 56px); line-height: 1.05; letter-spacing: -1.6px; margin: 10px 0 12px; }
+  .cabeca p { margin: 0; color: rgba(231,233,238,.75); font-size: 19px; max-width: 520px; }
+
+  /* Filtro */
+  .filtro { display: flex; gap: 8px; flex-wrap: wrap; margin: 40px 0 8px; }
+  .filtro button { font-family: inherit; font-size: 14px; font-weight: 500; color: var(--suave); background: var(--superficie); border: 1px solid var(--borda);
+    border-radius: 999px; padding: 7px 15px; cursor: pointer; }
+  .filtro button.ativo { color: #fff; background: var(--destaque); border-color: var(--destaque); }
+
+  /* Linha do tempo */
+  .linha { position: relative; margin-top: 26px; padding-left: 34px; }
+  /* Trilho da linha do tempo: o trecho roxo marca a versão que está na tela */
+  .trilho { position: absolute; left: 9px; top: 30px; bottom: 30px; width: 2px; background: linear-gradient(180deg, rgba(231,233,238,.14), rgba(231,233,238,.08) 80%, rgba(231,233,238,0)); border-radius: 2px; }
+  .progresso { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: linear-gradient(180deg, var(--claro) 0%, var(--destaque) 65%, rgba(99,102,241,0) 100%); border-radius: 2px; transition: top .35s ease, height .35s ease; }
+  .versao { position: relative; margin-bottom: 30px; }
+  .versao::before { content: ''; box-sizing: border-box; position: absolute; left: -32px; top: 22px; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--fundo); border: 2px solid rgba(231,233,238,.25); transition: border-color .25s, background .25s, box-shadow .25s; }
+  .versao.vendo::before { border-color: var(--claro); background: radial-gradient(circle at 35% 35%, var(--claro), var(--destaque)); box-shadow: 0 0 0 5px rgba(129,140,248,.22); }
+  .cartao { background: var(--superficie); border: 1px solid var(--borda); border-radius: 22px; padding: 24px 26px; }
+  .versao.atual .cartao { border-color: rgba(129,140,248,.28); }
+  .cab-versao { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .num { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 26px; color: var(--claro); }
+  .data { font-size: 14px; color: var(--suave); }
+  .atual-selo { font-size: 12px; font-weight: 500; color: var(--claro); border: 1px solid rgba(129,140,248,.35); border-radius: 999px; padding: 1px 9px; margin-left: 10px; vertical-align: 4px; font-family: 'Outfit'; }
+  .resumo { margin: 8px 0 18px; font-size: 19px; font-weight: 500; }
+  .destaque-img { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: start; }
+  .destaque-img img { width: 100%; border-radius: 18px; box-shadow: 0 0 0 1px var(--borda); display: block; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; font-size: 15.5px; color: rgba(231,233,238,.88); }
+  .tag { font-size: 13px; font-weight: 500; color: var(--apagado); white-space: nowrap; min-width: 78px; }
+  .tag.novo { color: var(--claro); }
+  li[hidden], .versao[hidden] { display: none; }
+
+  .loja { display: flex; align-items: center; gap: 16px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--borda); flex-wrap: wrap; }
+  .loja img { height: 44px; display: block; }
+  .loja span { font-size: 14px; color: var(--suave); }
+
+  footer { border-top: 1px solid var(--borda); margin-top: 60px; padding: 28px 0 44px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--suave); font-size: 14px; }
+  footer a { color: var(--suave); }
+
+  @media (max-width: 600px) {
+    nav .links a.esconde { display: none; }
+    .destaque-img { grid-template-columns: 1fr; }
+    .destaque-img img { width: 150px; }
+    .linha { padding-left: 28px; }
+    .versao::before { left: -26px; }
+    .trilho { left: 9px; }
+    li { grid-template-columns: 1fr; gap: 4px; }
+    .tag { justify-self: start; min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topo">
+  <svg class="pauta" viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="rgba(190,180,255,.18)" stroke-width="2">
+      <path d="M0 300 C 300 200, 600 200, 900 290 S 1300 360, 1440 290"/>
+      <path d="M0 320 C 300 220, 600 220, 900 310 S 1300 380, 1440 310"/>
+      <path d="M0 340 C 300 240, 600 240, 900 330 S 1300 400, 1440 330"/>
+      <path d="M0 360 C 300 260, 600 260, 900 350 S 1300 420, 1440 350"/>
+      <path d="M0 380 C 300 280, 600 280, 900 370 S 1300 440, 1440 370"/>
+    </g>
+  </svg>
+  <nav>
+    <a class="marca" href="./"><img src="icone.png" alt="">AcordeOn</a>
+    <div class="links">
+      <a class="esconde" href="./#recursos">Recursos</a>
+      <a class="ativo" href="novidades.html">Novidades</a>
+      <a href="privacidade.html">Privacidade</a>
+    </div>
+  </nav>
+  <div class="cabeca">
+    <div class="rotulo">Novidades</div>
+    <h1>O que mudou no AcordeOn.</h1>
+    <p>Cada atualização, da mais recente para a primeira. Para receber, atualize o app pela App Store.</p>
+  </div>
+</div>
+
+<div class="envoltorio">
+  <div class="filtro" role="group" aria-label="Filtrar">
+    <button type="button" class="ativo" data-f="todos">Tudo</button>
+    <button type="button" data-f="novo">Novidades</button>
+    <button type="button" data-f="melhoria">Melhorias</button>
+    <button type="button" data-f="correcao">Correções</button>
+  </div>
+
+  <div class="linha">
+    <div class="trilho"><div class="progresso"></div></div>
+
+    <article class="versao atual">
+      <div class="cartao">
+        <div class="cab-versao">
+          <span class="num">1.1.1<span class="atual-selo">Atual</span></span>
+          <span class="data">23 de novembro de 2026</span>
+        </div>
+        <p class="resumo">Importação mais completa e ajustes na tablatura.</p>
+        <ul>
+          <li data-t="melhoria"><span class="tag melhoria">Melhoria</span>Importação de links mais completa, inclusive de páginas que trazem só a tablatura.</li>
+          <li data-t="novo"><span class="tag novo">Novo</span>Atalho para editar a tablatura: com o cursor sobre ela no editor, o botão aparece acima do teclado.</li>
+          <li data-t="melhoria"><span class="tag melhoria">Melhoria</span>Nomes de corda com sustenido (C#, F#) e a última nota da linha não encostam mais nas barras da tablatura.</li>
+          <li data-t="correcao"><span class="tag correcao">Correção</span>O texto da cifra não some mais ao apagar perto de uma tablatura.</li>
+          <li data-t="correcao"><span class="tag correcao">Correção</span>Acordes marcados com asterisco (como C*) passam a ser reconhecidos e transpostos.</li>
+        </ul>
+        <div class="loja">
+          <a href="https://apps.apple.com/br/app/acordeon/id6830421465"><img src="img/app-store.png" alt="Baixar na App Store"></a>
+          <span>Compra única · iPhone e iPad</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="versao">
+      <div class="cartao">
+        <div class="cab-versao">
+          <span class="num">1.1</span>
+          <span class="data">17 de novembro de 2026</span>
+        </div>
+        <p class="resumo">Tablatura, ferramentas para estudar e envio de músicas.</p>
+        <div class="destaque-img">
+          <img src="img/loja-03.jpg" alt="Editor de tablatura" loading="lazy">
+          <ul>
+            <li data-t="novo"><span class="tag novo">Novo</span>Editor de tablatura em grade: toque na corda e na posição e escolha a casa.</li>
+            <li data-t="novo"><span class="tag novo">Novo</span>Tablaturas transpostas junto com os acordes.</li>
+            <li data-t="novo"><span class="tag novo">Novo</span>Envio de músicas e pastas para quem também usa o AcordeOn.</li>
+            <li data-t="novo"><span class="tag novo">Novo</span>Campo harmônico e mapa de notas no violão e no teclado.</li>
+            <li data-t="novo"><span class="tag novo">Novo</span>Importação de backups de outros apps de cifras, com revisão das músicas repetidas.</li>
+            <li data-t="melhoria"><span class="tag melhoria">Melhoria</span>Tom detectado pelos acordes da música, com a opção de escolher outro.</li>
+            <li data-t="melhoria"><span class="tag melhoria">Melhoria</span>PDF em A4, em duas colunas quando economiza páginas.</li>
+            <li data-t="melhoria"><span class="tag melhoria">Melhoria</span>Zoom da letra salvo em cada música.</li>
+            <li data-t="correcao"><span class="tag correcao">Correção</span>PDF enviado direto pelo WhatsApp voltou a funcionar.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="versao">
+      <div class="cartao">
+        <div class="cab-versao">
+          <span class="num">1.0</span>
+          <span class="data">6 de novembro de 2026</span>
+        </div>
+        <p class="resumo">Lançamento na App Store.</p>
+        <ul>
+          <li data-t="novo"><span class="tag novo">Novo</span>Biblioteca de cifras, com importação de arquivos e de links.</li>
+          <li data-t="novo"><span class="tag novo">Novo</span>Transposição em um toque, com o tom salvo em cada música.</li>
+          <li data-t="novo"><span class="tag novo">Novo</span>Pastas, tags, ritmos e gravações de trechos.</li>
+          <li data-t="novo"><span class="tag novo">Novo</span>Dicionário de acordes no violão e no teclado.</li>
+          <li data-t="novo"><span class="tag novo">Novo</span>Rolagem automática e duas colunas no iPad.</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+
+  <footer>
+    <span>AcordeOn · desenvolvido por João Faccio</span>
+    <span><a href="./">Site</a> · <a href="privacidade.html">Privacidade</a> · <a href="mailto:joaofaccio210@gmail.com">Contato</a></span>
+  </footer>
+</div>
+
+<script>
+  // Filtro por tipo: esconde os itens de outro tipo e as versões que ficarem vazias
+  document.querySelectorAll('.filtro button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.filtro button').forEach((x) => x.classList.toggle('ativo', x === b));
+    const f = b.dataset.f;
+    document.querySelectorAll('.versao').forEach((v) => {
+      let algum = false;
+      v.querySelectorAll('li').forEach((li) => { const ok = f === 'todos' || li.dataset.t === f; li.hidden = !ok; algum ||= ok; });
+      v.hidden = !algum;
+    });
+  }));
+
+  // Trilho acompanha a leitura: só o trecho da versão que está na tela fica
+  // roxo, e só a bolinha dela fica preenchida. No fim da página, a última.
+  const linha = document.querySelector('.linha'), prog = document.querySelector('.progresso');
+  function acompanhar() {
+    const visiveis = [...document.querySelectorAll('.versao:not([hidden])')];
+    if (!visiveis.length) return;
+    const meio = innerHeight * 0.45;
+    let atual = visiveis[0];
+    for (const v of visiveis) if (v.getBoundingClientRect().top + 30 <= meio) atual = v;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) atual = visiveis[visiveis.length - 1];
+    visiveis.forEach((v) => v.classList.toggle('vendo', v === atual));
+    const base = linha.getBoundingClientRect().top + 30;
+    const r = atual.getBoundingClientRect();
+    prog.style.top = (r.top + 30 - base) + 'px';
+    prog.style.height = Math.max(0, r.height - 30) + 'px';
+  }
+  addEventListener('scroll', acompanhar, { passive: true });
+  addEventListener('resize', acompanhar);
+  document.querySelectorAll('.filtro button').forEach((b) => b.addEventListener('click', () => requestAnimationFrame(acompanhar)));
+  acompanhar();
+</script>
+</body>
+</html>

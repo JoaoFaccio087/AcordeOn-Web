@@ -9,6 +9,7 @@ Este repositório guarda apenas as páginas do site. **O código do aplicativo �
 | Página | Endereço |
 |---|---|
 | Apresentação | https://joaofaccio087.github.io/AcordeOn-Web/ |
+| Novidades | https://joaofaccio087.github.io/AcordeOn-Web/novidades.html |
 | Política de privacidade | https://joaofaccio087.github.io/AcordeOn-Web/privacidade.html |
 
 ## Arquivos
@@ -16,6 +17,7 @@ Este repositório guarda apenas as páginas do site. **O código do aplicativo �
 | Arquivo | Uso |
 |---|---|
 | `index.html` | Página de apresentação do app |
+| `novidades.html` | O que mudou em cada versão do app |
 | `privacidade.html` | Política de privacidade (exigida pela App Store) |
 | `icone.png` | Ícone do app usado nas páginas |
 | `favicon.ico`, `favicon-32.png` | Ícone da aba do navegador |
